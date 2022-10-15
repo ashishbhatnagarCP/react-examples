@@ -1,22 +1,30 @@
 import "./App.css";
-import { useRef } from "react";
+import { useState } from "react";
 // const cities=['New York',"New Delhi","Pune"]
 
 function App() {
-  const txtTitle = useRef();
-  const hexColor = useRef();
+  const [title, setTitle] = useState("");
+  const [color, setColor] = useState("#000000");
+
   const submit = (e) => {
     e.preventDefault();
-    const title = txtTitle.current.value;
-    const color = hexColor.current.value;
     alert(`${title} and ${color}`);
-    txtTitle.current.value="";
-    hexColor.current.value="";
+    setTitle("");
+    setColor("#000000");
   };
   return (
     <form onSubmit={submit}>
-      <input ref={txtTitle} type="text" placeholder="color title...."></input>
-      <input ref={hexColor} type="color"></input>
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        type="text"
+        placeholder="color title...."
+      ></input>
+      <input
+        value={color}
+        onChange={(e) => setColor(e.target.value)}
+        type="color"
+      ></input>
       <button>Add</button>
     </form>
   );
