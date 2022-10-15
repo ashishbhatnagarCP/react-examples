@@ -12,26 +12,55 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    function Header() {
+    const dishes = [
+      "Black Beans Soup",
+      "Macaroni and Cheese",
+      "Salmon and Potatoes"
+    ]
+    const dishObjects = dishes.map((dish, i) => ({
+      id: i,
+      title: dish
+    }))
+    function Header(props) {
       return (
         <header>
-          <h1>Eve's Kitchen</h1>
+          <h1>{props.name}'s Kitchen</h1>
         </header>
       )
     }
-    function Main() {
+    function Footer(props) {
+      return (
+        <footer>
+          <p>Copywrite {props.year}</p>
+        </footer>
+      )
+    }
+
+    function Main(props) {
       return (
         <section>
-          <p>We serve most delicious food</p>
+          <img 
+          height={400}
+          src="https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          alt="Retaurant ready to serve at night"
+          />
+          <ul>
+            {
+              props.dishes.map((dish) => (
+                <li key={dish.id}>{dish.title}</li>
+              ))}
+          </ul>
         </section>
       )
     }
+
     function App() {
       return (
-        <div>
-          <Header></Header>
-          <Main></Main>
-        </div>
+        <React.Fragment>
+          <Header name="Ashish"></Header>
+          <Main dishes={dishObjects}></Main>
+          <Footer year={new Date().getFullYear()}></Footer>
+        </React.Fragment>
       )
     }
     ReactDOM.render(
